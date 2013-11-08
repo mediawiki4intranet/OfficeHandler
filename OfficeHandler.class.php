@@ -39,11 +39,11 @@ class OfficeTransformOutput extends MediaTransformOutput
         $this->params = $params;
         $this->path   = $path;
         // real path of file
-        $this->realPath   = $this->file->repo->directory . '/' . $this->file->hashPath . $this->file->name;
+        $this->realPath   = $this->file->getPath();
         // generated name without extension (with revId)
-        $this->generatedName = $this->file->name . '.' . $this->file->title->getLatestRevID();
+        $this->generatedName = $this->file->getName() . '.' . $this->file->getTitle()->getLatestRevID();
         // directory to generated path
-        $this->generatedDirectory = $wgUploadDirectory . static::CACHE_PATH . $this->file->hashPath;
+        $this->generatedDirectory = $wgUploadDirectory . static::CACHE_PATH . $this->file->getHashPath();
         // full generated path
         $this->generatedPath = $this->generatedDirectory . $this->generatedName . '.html';
         // file is already generated
@@ -69,15 +69,14 @@ class OfficeTransformOutput extends MediaTransformOutput
             }
             else
             {
-                $html = '<a href="' . $this->file->title->getFullURL() . '" id="office-generate-preview">' . wfMsg('generate') . '</a>';
+                $html = '<a href="' . $this->file->getTitle()->getFullURL() . '" id="office-generate-preview">' . wfMsg('generate') . '</a>';
                 return $html;
             }
         }
         elseif (isset($options['desc-link']) && $options['desc-link'])
         {
             // if other pages thumb is not avaliable
-            global $wgUser;
-            return $wgUser->getSkin()->link($this->file->title, $this->file->title->getPrefixedText());
+            return '';
         }
         return wfMsg('not-exist');
     }
@@ -92,7 +91,7 @@ class OfficeTransformOutput extends MediaTransformOutput
         {
             mkdir($wgTmpDirectory, 0775, true);
         }
-        $name = $this->file->name;
+        $name = $this->file->getName();
         $name = mb_substr($name, 0, mb_strrpos($name, "."));
         $tmpName = $wgTmpDirectory . '/' . $name . '.html';
         $curDir = getcwd();
@@ -121,7 +120,7 @@ class OfficeTransformOutput extends MediaTransformOutput
         }
         foreach (scandir($this->generatedDirectory) as $file)
         {
-            if (stripos($file, $this->file->name) === 0)
+            if (stripos($file, $this->file->getName()) === 0)
             {
                 unlink ($this->generatedDirectory . '/' . $file);
             }
@@ -137,6 +136,7 @@ class OfficeTransformOutput extends MediaTransformOutput
             return false;
         }
         $this->isGenerated = true;
+        $this->file->getTitle()->invalidateCache();
         return true;
     }
 }
