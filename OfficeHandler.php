@@ -34,6 +34,8 @@ if (!defined('MEDIAWIKI'))
 $wgExtensionMessagesFiles['OfficeHandler'] = dirname(__FILE__).'/OfficeHandler.i18n.php';
 $wgAutoloadClasses['OfficeHandler'] = dirname(__FILE__).'/OfficeHandler.class.php';
 $wgAutoloadClasses['OfficeAjax'] = dirname(__FILE__).'/OfficeAjax.class.php';
+$wgAutoloadClasses['MSProjectTransformOutput'] = dirname(__FILE__).'/MSProjectTransformOutput.php';
+$wgAutoloadClasses['OfficeTransformOutput'] = dirname(__FILE__).'/OfficeTransformOutput.php';
 $wgAjaxExportList[] = 'OfficeAjax::generatePreview';
 
 $wgExtensionCredits['parserhook'][] = array(
@@ -44,11 +46,13 @@ $wgExtensionCredits['parserhook'][] = array(
 );
 
 $wgResourceModules['OfficeHandler'] = array(
-    'scripts'       => array('Office.js'),
+    'scripts'       => array('Office.js', 'xslt/msp-outline.js'),
+	'styles'        => array('xslt/msp-outline.css'),
     'localBasePath' => __DIR__,
     'remoteExtPath' => 'OfficeHandler',
     'messages'      => array('loading'),
 );
+$wgMediaHandlers[OfficeHandler::MIME] = 'OfficeHandler';
 $wgHooks['BeforePageDisplay'][] = 'efOfficeBeforePageDisplay';
 
 function efOfficeBeforePageDisplay(&$output, &$skin)
@@ -60,6 +64,7 @@ function efOfficeBeforePageDisplay(&$output, &$skin)
 $egOfficeHandlerMimeTypes = array(
     'application/vnd.ms-excel',
     'application/msword',
+    'application/msproject',
     'application/vnd.oasis.opendocument.tex',
     'application/vnd.oasis.opendocument.text-template',
     'application/vnd.oasis.opendocument.graphics',
@@ -98,6 +103,7 @@ $egOfficeHandlerMimeTypes = array(
     'application/vnd.ms-excel.sheet.binary.macroEnabled.12',
     'application/vnd.ms-xpsdocument',
     'application/x-opc+zip',
+    'application/x-msproject',
 );
 
 foreach ($egOfficeHandlerMimeTypes as $mime)

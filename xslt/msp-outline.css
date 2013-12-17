@@ -1,0 +1,151 @@
+body {
+    font-family: sans-serif;
+    font-size: 8pt;
+}
+
+table.msp-tasks {
+    width: 100%;
+}
+
+tr.msp-task {
+    height: 1.5em !important;
+}
+
+.msp-task-id {
+    font-weight: normal;
+    text-align: right;
+}
+
+.msp-summary-task  {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.msp-collapse {
+    background-image: url(collapse.png);
+    background-repeat: no-repeat;
+}
+
+.msp-expand {
+    background-image: url(expand.png);
+    background-repeat: no-repeat;
+}
+
+.msp-outline-cell {
+    border-bottom-style: dotted;
+    border-left-style: solid;
+    border-width:1px;
+    border-color: rgb(200,200,200);
+    padding-left: 1em;
+    width: 0%;
+    white-space: nowrap;
+}
+
+th.msp-outline-cell{
+    padding: 0.9em 0;
+}
+
+td.msp-task-calendar {
+    width: 100%;
+    
+}
+
+div.msp-task-calendar {
+    width: 100%;
+    position: relative;
+    margin-top: 1em;
+}
+
+div.msp-milestone {
+    position: absolute;
+    height: 1em;
+    z-index: 11;
+    font-size:2.3em;
+    font-face:sans;
+    color:blue;
+    text-indent:-.25em;
+    top:-.6em;
+}
+div.msp-timespan {
+    position: absolute;
+    height: 1.3em;
+    border-style: solid;
+    border-width: 1px;
+    top: -.7em;
+    z-index: 10;
+}
+
+div.msp-timespan-summary-task{
+    background-color: black;
+    height: .5em;
+}
+
+div.msp-timespan-non-summary-task {
+    background-color: blue;
+    height: .5em;
+}
+
+div.msp-calendar-year {
+    border-right-style: none;
+    top: -2.1em;
+}
+div.msp-calendar-year-odd {
+}
+div.msp-calendar-year-even {
+    background-color: rgb(200,200,200);
+}
+
+div.msp-calendar-month {
+    border-right-style: none;
+    padding: 0 0 .1em 0;
+}
+div.msp-calendar-month-odd {
+}
+div.msp-calendar-month-even {
+    background-color: rgb(200,200,200);
+}
+
+div.msp-timespan-resources {
+    position: absolute;
+    height: 1em;
+    top: -1.2em;
+    padding-left: .3em;
+    z-index:10;
+}
+
+div.msp-timespan-planned {
+    top: -.5em;
+    z-index:10;
+    background-color: yellow;
+}
+
+div.msp-timespan-base {
+    top: -.25em;
+    z-index:5;
+    background-color: blue;
+}
+
+div.msp-task-link {
+    position: absolute;
+    border-width: 1px;
+    border-style: dotted;
+    border-color: rgb(200,200,200);
+    z-index: 1;
+}
+
+div.msp-link {
+    border-right-style: solid;
+    position: absolute;
+    border-right-color: rgb(125,125,125);
+    height: 1.5em;
+    border-width: 1px;
+    z-index: 1;
+}
+
+div.msp-link-arrow  {
+    position: absolute;
+    color: rgb(125,125,125);
+    left: -.19em;
+    top: -.1em;
+    z-index:15;
+}
